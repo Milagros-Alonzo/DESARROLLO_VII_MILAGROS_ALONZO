@@ -4,21 +4,19 @@
 $nombre = "Juan";
 $edad = 25;
 
-// Concatenación usando el operador .
-$presentacion1 = "Hola, mi nombre es " . $nombre . " y tengo " . $edad . " años.";
+// Usando echo
+echo "Hola, mundo!<br>";
+echo "Mi nombre es $nombre<br>";
 
-// Concatenación dentro de comillas dobles
-$presentacion2 = "Hola, mi nombre es $nombre y tengo $edad años.";
+// Usando print
+print "Tengo $edad años<br>";
 
-// Definición de una constante
-define("SALUDO", "¡Bienvenido!");
+// Usando printf (permite formateo)
+printf("Me llamo %s y tengo %d años<br>", $nombre, $edad);
 
-// Concatenación con constante
-$mensaje = SALUDO . " " . $nombre;
-
-echo $presentacion1 . "<br>";
-echo $presentacion2 . "<br>";
-echo $mensaje . "<br>";
+// Usando var_dump (útil para debugging)
+var_dump($nombre);
+echo "<br>";
 
 ?>
                         
