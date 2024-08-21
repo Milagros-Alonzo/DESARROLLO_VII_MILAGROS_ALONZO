@@ -8,6 +8,8 @@ $telefono = 69727247;
 define("OCUPACION", "Estudiante")
 
 //impresiones 
+echo "<br>"
+
 echo "Mi nombre es $nombre_completo<br>";
 
 print "Tengo $edad años<br>";
@@ -25,7 +27,7 @@ printf("Mi correo es  %s y mi telefono es %d <br>", $correo, $telefono);
 // Usando var_dump (útil para debugging)
 var_dump(OCUPACION);
 var_dump($nombre_completo);
-var_dump($edad);
+var_dump($edad);git
 var_dump($correo)
 var_dump($telefono)
 ?>
