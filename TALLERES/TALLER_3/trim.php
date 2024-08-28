@@ -65,7 +65,7 @@ $cadenaLimpia = limpiarCadena($cadenaSucia, "
 echo "
 Cadena sucia: '$cadenaSucia'
 ";
-echo "Cadena limpia: '$cadenaLimpia'
+echo "Cadena : '$cadenaLimpia'
 ";
 ?>
       
