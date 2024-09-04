@@ -13,5 +13,8 @@ foreach ($libros as $libro) {
 
 echo '</div>';
 
+include 'includes/prac.php';
+
+echo '</div>';
 include 'includes/footer.php';
 ?>
