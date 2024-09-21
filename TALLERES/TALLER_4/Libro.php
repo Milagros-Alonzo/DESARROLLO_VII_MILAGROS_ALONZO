@@ -35,12 +35,12 @@ class Libro {
     }
 
     public function obtenerInformacion() {
-        return "'{$this->getTitulo()}' por {$this->getAutor()}, publicado en {$this->getAnioPublicacion()}";
+        return "'Titulo :{$this->getTitulo()}' por {$this->getAutor()}, publicado en {$this->getAnioPublicacion()}";
     }
 }
 
 // Ejemplo de uso
 $miLibro = new Libro("  El Quijote  ", "Miguel de Cervantes", "1605");
 echo $miLibro->obtenerInformacion();
-echo "\nTítulo: " . $miLibro->getTitulo();
+echo " " . $miLibro->getTitulo();
         
