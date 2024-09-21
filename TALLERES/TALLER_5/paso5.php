@@ -53,9 +53,7 @@ function filtrarPorCategoria($productos, $categoria) {
     });
 }
 
-$productosDe
-
-Computadoras = filtrarPorCategoria($tiendaData['productos'], "computadoras");
+$productosDeComputadoras = filtrarPorCategoria($tiendaData['productos'], "computadoras");
 echo "\nProductos en la categoría 'computadoras':\n";
 imprimirProductos($productosDeComputadoras);
 
@@ -79,6 +77,54 @@ echo "\nDatos actualizados de la tienda (JSON):\n$jsonActualizado\n";
 // - Producto más vendido
 // - Cliente que más ha comprado
 // Tu código aquí
+function generarResumenVentas($ventas, $productos, $clientes) {
+    $resumen = [
+        "total_ventas" => 0,
+        "producto_mas_vendido" => null,
+        "cliente_mayor_comprador" => null
+    ];
+    
+    $ventasPorProducto = [];
+    $ventasPorCliente = [];
+    
+    foreach ($ventas as $venta) {
+       
+        $resumen["total_ventas"] += $venta["cantidad"];
+        
 
+        if (!isset($ventasPorProducto[$venta["producto_id"]])) {
+            $ventasPorProducto[$venta["producto_id"]] = 0;
+        }
+        $ventasPorProducto[$venta["producto_id"]] += $venta["cantidad"];
+        
+        
+        if (!isset($ventasPorCliente[$venta["cliente_id"]])) {
+            $ventasPorCliente[$venta["cliente_id"]] = 0;
+        }
+        $ventasPorCliente[$venta["cliente_id"]] += $venta["cantidad"];
+    }
+    
+
+    $idProductoMasVendido = array_keys($ventasPorProducto, max($ventasPorProducto))[0];
+    $productoMasVendido = array_filter($productos, function($producto) use ($idProductoMasVendido) {
+        return $producto["id"] == $idProductoMasVendido;
+    });
+    $resumen["producto_mas_vendido"] = reset($productoMasVendido)["nombre"];
+    
+    $idClienteMayorComprador = array_keys($ventasPorCliente, max($ventasPorCliente))[0];
+    $clienteMayorComprador = array_filter($clientes, function($cliente) use ($idClienteMayorComprador) {
+        return $cliente["id"] == $idClienteMayorComprador;
+    });
+    $resumen["cliente_mayor_comprador"] = reset($clienteMayorComprador)["nombre"];
+    
+    return $resumen;
+}
+
+$resumenVentas = generarResumenVentas($ventas, $tiendaData['productos'], $tiendaData['clientes']);
+
+echo "Resumen de Ventas:";
+echo "Total de ventas: {$resumenVentas['total_ventas']} productos vendidos";
+echo "Producto más vendido: {$resumenVentas['producto_mas_vendido']}";
+echo "Cliente que más ha comprado: {$resumenVentas['cliente_mayor_comprador']}";
 ?>
     
