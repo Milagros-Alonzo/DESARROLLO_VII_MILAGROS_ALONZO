@@ -53,7 +53,7 @@ function invertir_palabras($texto){
 }
 
 
-//contar_palabras(" hoals como estas pepe   mi amor");
+//contar_palabras(" hoals como estas ");
 //contar_vocales("hay 4 vocales");
 //invertir_palabras(" me gustas mucho mi amor");
 ?>
