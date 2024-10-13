@@ -7,12 +7,8 @@ function validarEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function validarEdad($edad) {
-    return is_numeric($edad) && $edad >= 18 && $edad <= 120;
-}
-
 function validarSitioWeb($sitioWeb) {
-    return empty($sitioWeb) || filter_var($sitioWeb, FILTER_VALIDATE_URL);
+ return empty($sitioWeb) || filter_var($sitioWeb, FILTER_VALIDATE_URL);
 }
 
 function validarGenero($genero) {
@@ -46,5 +42,14 @@ function validarFotoPerfil($archivo) {
     }
 
     return true;
+
+    //agregamos la funcion para validar fecha de bacimiento
+    function validarFechaNacimiento($fechaNacimiento) {
+        $fecha_actual = new DateTime();
+        $fecha_nacimiento = new DateTime($fechaNacimiento);
+        $edad = $fecha_actual->diff($fecha_nacimiento)->y;
+        
+        return $edad >= 18 && $edad <= 120;
+    }
 }
 ?>
