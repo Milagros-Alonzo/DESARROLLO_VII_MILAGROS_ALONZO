@@ -9,12 +9,13 @@ function sanitizarEmail($email) {
     return filter_var(trim($email), FILTER_SANITIZE_EMAIL);
 }
 
-function sanitizarEdad($edad) {
-    return filter_var($edad, FILTER_SANITIZE_NUMBER_INT);
+//agregar funcion de sanatizacion
+function sanitizarFechaNacimiento($fechaNacimiento) {
+    return filter_var($fechaNacimiento, FILTER_SANITIZE_SPECIAL_CHARS);
 }
 
-function sanitizarSitioWeb($sitio_Web) {
-    return filter_var(trim($sitio_Web), FILTER_SANITIZE_URL);
+function sanitizarSitioWeb($sitioWeb) {
+    return filter_var(trim($sitioWeb), FILTER_SANITIZE_URL);
 }
 
 function sanitizarGenero($genero) {
@@ -24,15 +25,11 @@ function sanitizarGenero($genero) {
 function sanitizarIntereses($intereses) {
     return array_map(function($interes) {
         return filter_var(trim($interes), FILTER_SANITIZE_SPECIAL_CHARS);
-    }, $intereses);
+    }, $intereses);//S
 }
 
 function sanitizarComentarios($comentarios) {
     return htmlspecialchars(trim($comentarios), ENT_QUOTES, 'UTF-8');
 }
 
-//agregar funcion de sanatizacion
-function sanitizarFechaNacimiento($fechaNacimiento) {
-    return filter_var($fechaNacimiento, FILTER_SANITIZE_SPECIAL_CHARS);
-}
 ?>
