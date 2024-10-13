@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "titulo": "Cien años de soledad",
+        "autor": "Gabriel García Márquez",
+        "anioPublicacion": 1967,
+        "estado": "disponible",
+        "fechaAdquisicion": "2023-01-15",
+        "tipo": "Libro",
+        "isbn": "9780307474728"
+    },
+    {
+        "id": 2,
+        "titulo": "National Geographic",
+        "autor": "National Geographic Society",
+        "anioPublicacion": 2023,
+        "estado": "prestado",
+        "fechaAdquisicion": "2023-06-01",
+        "tipo": "Revista",
+        "numeroEdicion": 6
+    },
+    {
+        "id": 3,
+        "titulo": "El Padrino",
+        "autor": "Francis Ford Coppola",
+        "anioPublicacion": 1972,
+        "estado": "en_reparacion",
+        "fechaAdquisicion": "2022-12-10",
+        "tipo": "DVD",
+        "duracion": 175
+    }
+]

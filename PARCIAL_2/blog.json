@@ -1,0 +1,29 @@
+[
+    {
+        "id": "1",
+        "fecha_creacion": "2024-09-27",
+        "tipo": 1,
+        "titulo": "Mi primera entrada",
+        "descripcion": "Esta es mi primera entrada en el blog. \u00a1Estoy emocionado de comenzar esta nueva aventura!"
+    },
+    {
+        "id": 2,
+        "fecha_creacion": "2023-05-02",
+        "tipo": 2,
+        "titulo1": "Receta de la semana",
+        "descripcion1": "Esta semana les traigo una deliciosa receta de pasta al pesto.",
+        "titulo2": "Tip culinario",
+        "descripcion2": "\u00bfSab\u00edas que puedes hacer pesto con diferentes tipos de hojas verdes? Prueba con r\u00facula o espinaca para darle un toque diferente."
+    },
+    {
+        "id": 3,
+        "fecha_creacion": "2023-05-03",
+        "tipo": 3,
+        "titulo1": "Tecnolog\u00eda",
+        "descripcion1": "Los \u00faltimos avances en inteligencia artificial est\u00e1n revolucionando la industria.",
+        "titulo2": "Ciencia",
+        "descripcion2": "Cient\u00edficos descubren un nuevo planeta potencialmente habitable en nuestra galaxia.",
+        "titulo3": "Salud",
+        "descripcion3": "Nuevos estudios sugieren que el ejercicio regular puede mejorar la memoria a largo plazo."
+    }
+]

@@ -7,6 +7,7 @@ for ($i = 0; $i < count($frases); $i++) {
     echo contar_palabras($frases);
     echo contar_vocales($frases);
     echo invertir_palabras($frases);
-       }
+
+    }
 
 ?>
