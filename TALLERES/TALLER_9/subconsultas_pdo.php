@@ -44,10 +44,49 @@ try {
         echo "Promedio general: $" . number_format($row['promedio_ventas'], 2) . "<br>";
     }
 
-} catch(PDOException $e) {
+}catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
+try{
+//consulta uno de tarea
+$sql = "SELECT p.nombre, p.precio, c.nombre AS categoria
+FROM productos p
+LEFT JOIN detalles_venta v ON p.id = v.producto_id
+JOIN categorias c ON p.categoria_id = c.id
+WHERE v.producto_id IS NULL";
+
+$stmt = $pdo->query($sql);
+echo "<h3>Producto no vendido:</h3>";
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "Producto: {$row['nombre']}, Precio: $" . number_format($row['precio'], 2) . ", ";
+    echo "Categoría: {$row['categoria']}<br>";
+}
+
+}catch(PDOException $e) {
+echo "Error: " . $e->getMessage();
+}
+
+// consulta dos de la tarea 
+try{
+    $sql = "SELECT c.nombre AS categoria, 
+    COUNT(p.id) AS numero_productos, 
+    SUM(p.precio) AS valor_total_inventario
+FROM categorias c
+LEFT JOIN productos p ON c.id = p.categoria_id
+GROUP BY c.nombre";
+
+$stmt = $pdo->query($sql);
+echo "<h3>Listar las categorías con el número de productos y el valor total del inventario:</h3>";
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "Categoría: {$row['categoria']}, ";
+    echo "Número de productos: {$row['numero_productos']}, ";
+    echo "Valor total del inventario: $" . number_format($row['valor_total_inventario'], 2) . "<br>";
+}
+
+}catch(PDOException $e) {
+echo "Error: " . $e->getMessage();
+}
 $pdo = null;
 ?>
 

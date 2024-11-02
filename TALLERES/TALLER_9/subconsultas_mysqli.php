@@ -40,6 +40,7 @@ $sql = "SELECT c.nombre, c.email,
 
 $result = mysqli_query($conn, $sql);
 
+
 if ($result) {
     echo "<h3>Clientes con compras superiores al promedio:</h3>";
     while ($row = mysqli_fetch_assoc($result)) {
@@ -49,7 +50,43 @@ if ($result) {
     mysqli_free_result($result);
 }
 
-mysqli_close($conn);
+// Verificar la conexión a la base de datos
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+
+
+
+// Consulta para encontrar productos que nunca se han vendido
+$sql = "SELECT p.nombre, p.precio, c.nombre AS categoria
+FROM productos p
+LEFT JOIN detalles_venta v ON p.id = v.producto_id
+JOIN categorias c ON p.categoria_id = c.id
+WHERE v.producto_id IS NULL";
+
+
+
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+    echo "<h3>Productos que nunca se han vendido:</h3>";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "Producto: {$row['nombre']}, Precio: $" . number_format($row['precio'], 2) . ", ";
+            echo "Categoría: {$row['categoria']}<br>";
+        }
+    } else {
+        echo "No hay productos sin ventas registradas.<br>";
+    }
+    $result->free(); // Liberar el resultado
+} else {
+    echo "Error en la consulta de productos sin ventas: " . $conn->error;
+}
+
+// Cerrar la conexión
+$conn->close();
+
 ?>
 
    
