@@ -80,19 +80,64 @@ function mostrarHistorialClientes($pdo) {
     echo "<table border='1'>";
     echo "<tr><th>Cliente</th><th>Email</th><th>Producto</th><th>Cantidad</th><th>Monto Total</th><th>Fecha Venta</th></tr>";
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr><td>{$row['cliente']}</td><td>{$row['email']}</td><td>{$row['producto']}</td><td>{$row['cantidad']}</td><td>${$row['monto_total']}</td><td>{$row['fecha_venta']}</td></tr>";
+        echo "<tr><td>{$row['cliente']}</td><td>{$row['email']}</td><td>{$row['producto']}</td><td>{$row['cantidad']}</td><td>{$row['monto_total']}</td><td>{$row['fecha_venta']}</td></tr>";
     }
     echo "</table>";
 }
 
-// Mostrar resultados
-mostrarProductosBajoStock($pdo);
-mostrarHistorialClientes($pdo);
-$pdo = null;
+function mostrarRendimientoCategoria($pdo) {
+    try {
+        $stmt = $pdo->query("SELECT * FROM vista_rendimiento_categoria");
+        echo "<h3>Rendimiento por Categoría:</h3>";
+        echo "<table border='1'><tr><th>Categoría</th><th>Total Productos</th><th>Productos Vendidos</th><th>Ingresos Totales</th><th>Producto Más Vendido</th></tr>";
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr><td>{$row['categoria']}</td><td>{$row['total_productos']}</td><td>{$row['productos_vendidos']}</td><td>{$row['ingresos_totales']}</td><td>{$row['producto_mas_vendido']}</td></tr>";
+        }
+        echo "</table>";
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+function mostrarTendenciasVentas($pdo) {
+    try {
+        $stmt = $pdo->query("SELECT * FROM vista_tendencias_ventas");
+        
+        echo "<h3>Tendencias de Ventas Mensuales:</h3>";
+        echo "<table border='1'>";
+        echo "<tr><th>Mes</th><th>Ventas Totales</th><th>Comparativa Mes Anterior</th></tr>";
+        
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr>";
+            echo "<td>{$row['mes']}</td>";
+            echo "<td>$" . number_format($row['ventas_totales'], 2) . "</td>";
+            
+            // Mostrar el cambio con respecto al mes anterior, si existe el campo
+            if (isset($row['comparativa_mes_anterior'])) {
+                $comparativa = $row['comparativa_mes_anterior'] >= 0 ? "+" : "";
+                $comparativa .= number_format($row['comparativa_mes_anterior'], 2) . "%";
+                echo "<td>{$comparativa}</td>";
+            } else {
+                echo "<td>No disponible</td>";
+            }
+            
+            echo "</tr>";
+        }
+        
+        echo "</table>";
+    } catch (PDOException $e) {
+        echo "Error al mostrar tendencias de ventas: " . $e->getMessage();
+    }
+}
+
+
+
 // Mostrar los resultados
 mostrarResumenCategorias($pdo);
 mostrarProductosPopulares($pdo);
-
+mostrarProductosBajoStock($pdo);
+mostrarHistorialClientes($pdo);
+mostrarRendimientoCategoria($pdo);
+mostrarTendenciasVentas($pdo);
 $pdo = null;
 ?>
      
