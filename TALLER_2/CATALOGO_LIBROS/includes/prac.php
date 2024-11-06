@@ -1,0 +1,1 @@
+<div><?php echo "hola es una practica"; ?></div>
