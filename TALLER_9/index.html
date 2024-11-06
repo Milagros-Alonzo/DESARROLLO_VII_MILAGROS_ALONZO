@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scroll Infinito - Productos</title>
+    <style>
+        .results table { width: 100%; border-collapse: collapse; }
+        .results th, .results td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+        .loader { text-align: center; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="results">
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                </tr>
+            </thead>
+            <tbody id="productBody">
+                <!-- Aquí se cargarán los productos -->
+            </tbody>
+        </table>
+        <div id="loader" class="loader">Cargando más productos...</div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const loader = document.getElementById("loader");
+
+        // Función para cargar productos
+        function loadProducts() {
+            fetch(`load_products.php?page=${currentPage}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById("productBody");
+                    data.products.forEach(product => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${product.id}</td>
+                            <td>${product.nombre}</td>
+                            <td>${product.precio}</td>
+                            <td>${product.categoria}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                    if (data.has_more) {
+                        currentPage++;
+                        loader.style.display = "block";
+                    } else {
+                        loader.style.display = "none";
+                    }
+                })
+                .catch(error => console.error("Error cargando productos:", error));
+        }
+
+        // Detecta cuando el usuario llega al final de la página
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                loadProducts();
+            }
+        });
+
+        // Carga inicial
+        loadProducts();
+    </script>
+</body>
+</html>
