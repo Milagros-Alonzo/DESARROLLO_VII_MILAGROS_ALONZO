@@ -95,10 +95,11 @@ function calcularComisiones($conn) {
     }
 }
 
+
 // Ejemplos de uso
 registrarVenta($conn, 1, 1, 2);
 obtenerEstadisticasCliente($conn, 1);
-
+procesarDevolucion($conn, $venta_id, $producto_id, $cantidad);
 mysqli_close($conn);
 ?>
         
